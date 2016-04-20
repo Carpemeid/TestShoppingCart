@@ -22,7 +22,7 @@ class CategoryFilterController: UIViewController, UITableViewDataSource, UITable
     //MARK: iVars
     var parent : FiltersControllerDelegate?
     var selectedCategoryName : String?
-    var categories : [String] = Register.categories 
+    var categories : [String] = Register.cachedCategories
     
     //MARK: View life cycle
 
@@ -66,6 +66,10 @@ class CategoryFilterController: UIViewController, UITableViewDataSource, UITable
         {
             selectedCategoryName = categories[indexPath.row]
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
     }
     
     func markCellAtIndexPath(indexPath : NSIndexPath, withAccessoryType accessoryType : UITableViewCellAccessoryType)

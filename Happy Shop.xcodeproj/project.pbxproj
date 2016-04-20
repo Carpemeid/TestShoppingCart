@@ -17,6 +17,8 @@
 		3C003FAD1CC562B90086877B /* CategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FAC1CC562B90086877B /* CategoryHeaderView.swift */; };
 		3C003FAF1CC565FC0086877B /* CategoryFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FAE1CC565FC0086877B /* CategoryFilterController.swift */; };
 		3C003FB21CC5A6A80086877B /* ExtensionEVObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FB11CC5A6A80086877B /* ExtensionEVObject.swift */; };
+		3C003FB61CC69EDD0086877B /* ProductDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FB51CC69EDD0086877B /* ProductDetailsController.swift */; };
+		3CCD56931CC8088C002AF042 /* Alertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD56921CC8088C002AF042 /* Alertor.swift */; };
 		3CDD0FD31CC16FE4004023C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD0FD21CC16FE4004023C7 /* AppDelegate.swift */; };
 		3CDD0FDC1CC16FE4004023C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CDD0FDB1CC16FE4004023C7 /* Assets.xcassets */; };
 		3CDD0FEA1CC16FE4004023C7 /* Happy_ShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD0FE91CC16FE4004023C7 /* Happy_ShopTests.swift */; };
@@ -67,6 +69,8 @@
 		3C003FAC1CC562B90086877B /* CategoryHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHeaderView.swift; sourceTree = "<group>"; };
 		3C003FAE1CC565FC0086877B /* CategoryFilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryFilterController.swift; sourceTree = "<group>"; };
 		3C003FB11CC5A6A80086877B /* ExtensionEVObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEVObject.swift; sourceTree = "<group>"; };
+		3C003FB51CC69EDD0086877B /* ProductDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsController.swift; sourceTree = "<group>"; };
+		3CCD56921CC8088C002AF042 /* Alertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertor.swift; sourceTree = "<group>"; };
 		3CDD0FCF1CC16FE4004023C7 /* Happy Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDD0FD21CC16FE4004023C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CDD0FDB1CC16FE4004023C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				3C003F801CC4F3280086877B /* CategoriesController.swift */,
 				3C003F921CC5250B0086877B /* MainTabBarController.swift */,
 				3C003FAE1CC565FC0086877B /* CategoryFilterController.swift */,
+				3C003FB51CC69EDD0086877B /* ProductDetailsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 		3CDD10031CC16FF6004023C7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3CCD56921CC8088C002AF042 /* Alertor.swift */,
 				3C003FB01CC5A6900086877B /* Extensions */,
 				3C003F891CC4F64F0086877B /* Notifications */,
 				3C003F861CC4F5E10086877B /* Persistance */,
@@ -482,7 +488,9 @@
 				3CDD10151CC17C57004023C7 /* ConnectionChecker.swift in Sources */,
 				3CDD10251CC4129C004023C7 /* ViewController.swift in Sources */,
 				3C003F881CC4F5F60086877B /* Register.swift in Sources */,
+				3CCD56931CC8088C002AF042 /* Alertor.swift in Sources */,
 				3CDD10291CC41851004023C7 /* ProductListResponse.swift in Sources */,
+				3C003FB61CC69EDD0086877B /* ProductDetailsController.swift in Sources */,
 				3CDD10201CC3F40B004023C7 /* Networker.swift in Sources */,
 				3C003F811CC4F3280086877B /* CategoriesController.swift in Sources */,
 				3CDD10191CC17DE0004023C7 /* NetworkManager.swift in Sources */,

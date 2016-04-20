@@ -16,17 +16,21 @@ class Networker: NSObject {
     //even random products just by page
     class func productsFromCategory(category : String?, atPage page : Int?, responseHandler : (products : [Product]) -> Void)
     {
-        NetworkManager.GET().URL().objectAt(URLConstructor.products().value, withParameters: ParametersManager.URLParametersForProductsInCategory(category, atPage: page), inBackground: false) { (result : Result<ProductListResponse, NSError>) in
+        NetworkManager.GET().URL().objectAt(URLConstructor.products().value, withParameters: ParametersManager.URLParametersForProductsInCategory(category, atPage: page), inBackground: true) { (result : Result<ProductListResponse, NSError>) in
             
-            responseHandler(products: result.value?.products ?? [])
+            dispatch_async(dispatch_get_main_queue(), {
+                responseHandler(products: result.value?.products ?? [])
+            })
         }
     }
     
     class func productWithID(productId : Int, responseHandler : (product : Product?) -> Void)
     {
-        NetworkManager.GET().URL().objectAt(URLConstructor.productWithId(productId).value, withParameters: nil, inBackground: false) { (result : Result<ProductResponse, NSError>) in
+        NetworkManager.GET().URL().objectAt(URLConstructor.productWithId(productId).value, withParameters: nil, inBackground: true) { (result : Result<ProductResponse, NSError>) in
             
-            responseHandler(product: result.value?.product)
+            dispatch_async(dispatch_get_main_queue(), {
+                responseHandler(product: result.value?.product)
+            })
         }
     }
 }

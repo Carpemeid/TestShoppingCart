@@ -10,6 +10,7 @@ import UIKit
 
 //MARK: Local constants
 private let kSegueToFilters : String = "toFilters"
+private let kSegueToDetails : String = "toDetails"
 
 private let kTabTitleShoppingCart : String = "Shopping cart"
 private let kRefreshBadgeMethod : String = "refreshBadge"
@@ -35,14 +36,6 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
         {
             resetCategory()
         }
-    }
-    
-    func resetCategory()
-    {
-        currentPage = selectedCategory != .None ? 1 : nil
-        
-        cantBePaginated = false
-        shouldReplaceProducts = true
     }
     
     var shouldReplaceProducts : Bool = false
@@ -73,12 +66,9 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     {
         didSet
         {
-            if !isShoppingCartController
-            {
-                categories = Array(productsInCategories.keys)
-            }
+            categories = Array(productsInCategories.keys)
             
-            collectionView.reloadData()
+            collectionView?.reloadData()
         }
     }
     
@@ -86,25 +76,43 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     {
         didSet
         {
-            Register.categories = categories
+            Register.cachedCategories = categories
         }
     }
     
     //MARK: View life cycle
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         loadData()
-        configureView()
+        configureRefreshController()
     }
     
     //MARK: Data management
+    func resetCategory()
+    {
+        currentPage = selectedCategory != .None ? 1 : nil
+        
+        cantBePaginated = false
+        shouldReplaceProducts = true
+        
+        loadData()
+    }
+    
     func loadData(atNextPage : Bool = false)
     {
         if isShoppingCartController
         {
-            products = Register.getProductsFromCart()
+            var localProducts : [Product] = Register.cachedProductsInCart
+            
+            if let selectedCategory = selectedCategory
+            {
+                localProducts = localProducts.filter({$0.category == selectedCategory})
+            }
+            
+            products = localProducts
             refreshControl.endRefreshing()
+            collectionView?.reloadData()
         }
         else
         {
@@ -139,13 +147,20 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
             self.refreshControl.endRefreshing()
             
             self.hideFooter()
+            
+            if !atNextPage
+            {
+                self.collectionView.collectionViewLayout.collectionViewContentSize()
+                
+                //because force scrolling gets interrupted while layout processes happen
+                NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: #selector(CategoriesController.scrollToTop), userInfo: nil, repeats: false)
+            }
         }
     }
     
-    func refreshData()
+    func scrollToTop()
     {
-        resetCategory()
-        loadData()
+        collectionView.setContentOffset(CGPointMake(0, self.collectionView.frame.origin.y - 64), animated: true)
     }
     
     //MARK: Collection view delegate methods
@@ -157,7 +172,7 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
         
         var numberOfItems : Int = (productsInCategories[categories[section]]?.count ?? 0)
         
-        if currentPage != .None && !cantBePaginated && !needsHiddenFooter
+        if currentPage != .None && !cantBePaginated && !needsHiddenFooter && !isShoppingCartController
         {
             numberOfItems += 1
             hasAdditionalRow = true
@@ -228,7 +243,7 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        performSegueWithIdentifier(kSegueToDetails, sender: self)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
@@ -260,9 +275,9 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     }
     
     //MARK: View configuration
-    func configureView()
+    func configureRefreshController()
     {
-        refreshControl.addTarget(self, action: #selector(CategoriesController.refreshData), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(CategoriesController.resetCategory), forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
     }
@@ -271,11 +286,14 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     {
         refreshBadge()
         startListening()
+        
+        title = kTabTitleShoppingCart
     }
     
     func refreshBadge()
     {
-        navigationController?.tabBarItem.badgeValue = Register.getProductsFromCart().count == 0 ? nil : "\(Register.getProductsFromCart().count)"
+        navigationController?.tabBarItem.badgeValue = Register.cachedProductsInCart.count == 0 ? nil : "\(Register.cachedProductsInCart.count)"
+        loadData()
     }
     
     //MARK: Navigation
@@ -286,6 +304,11 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
             filtersController.parent = self
             filtersNavigationController = navController
             filtersController.selectedCategoryName = selectedCategory
+        }
+        
+        if let controller = segue.destinationViewController as? ProductDetailsController, index = collectionView.indexPathsForSelectedItems()?.first, product = productsInCategories[ categories[index.section]]?[index.row]
+        {
+            controller.product = product
         }
     }
     

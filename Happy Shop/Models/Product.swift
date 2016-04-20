@@ -17,7 +17,6 @@ class Product: EVObject {
     var price : NSNumber?
     var _description : String = ""
     var under_sale : NSNumber?
-    var test : NSNumber?
     
     var img_url : String = ""
 }

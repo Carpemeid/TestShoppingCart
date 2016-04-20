@@ -13,8 +13,76 @@ private let kCategoriesKey : String = "categories"
 
 class Register : NSObject
 {
+    //MARK: Cached data
+    static var cachedCategories : [String]
+    {
+        set
+        {
+            if newValue.count > cachedCategories.count
+            {
+                localCategories = newValue
+            }
+        }
+        
+        get
+        {
+            return localCategories
+        }
+    }
+    
+    private static var localCategories : [String] = Register.categories
+    
+    static var cachedProductsInCart : [Product] = Register.productsInCart
+    {
+        didSet
+        {
+            NSNotificationCenter.quickPost(kNotificationCartItemsChanged)
+        }
+    }
+    
+    class func indexOfProductWithId(productId : Int?) -> Int?
+    {
+        if let productId = productId, index = cachedProductsInCart.indexOf({($0.id?.integerValue ?? -1) == productId})
+        {
+            return index
+        }
+        else
+        {
+            return nil
+        }
+    }
+    
+    class func addProductToCart(product : Product?)
+    {
+        if let product = product
+        {
+            if indexOfProductWithId(product.id?.integerValue) == .None
+            {
+                cachedProductsInCart.append(product)
+                
+                //setGenericValueForKey(product, forKey: kProductsKey)
+            }
+        }
+    }
+    
+    class func removeProductFromCart(productID : Int?)
+    {
+        if let productIndex = indexOfProductWithId(productID)
+        {
+            cachedProductsInCart.removeAtIndex(productIndex)
+            
+            //setGenericValueForKey(productsInCart.removeAtIndex(productIndex), forKey: kProductsKey)
+        }
+    }
+    
+    class func saveToDisk()
+    {
+        Register.categories = cachedCategories
+        Register.productsInCart = cachedProductsInCart
+    }
+    
     //MARK: Local storage access methods
-    class var categories : [String]
+    private class var categories : [String]
     {
         set
         {
@@ -35,50 +103,11 @@ class Register : NSObject
         }
     }
     
-    class func getProductsFromCart() -> [Product]
-    {
-        return productsInCart
-    }
-    
-    class func addProductToCart(product : Product)
-    {
-        if indexOfProductWithId(product.id?.integerValue) == .None
-        {
-            productsInCart.append(product)
-            
-            //setGenericValueForKey(product, forKey: kProductsKey)
-        }
-    }
-    
-    class func removeProductFromCart(productID : Int?)
-    {
-        if let productIndex = indexOfProductWithId(productID)
-        {
-            productsInCart.removeAtIndex(productIndex)
-                
-            //setGenericValueForKey(productsInCart.removeAtIndex(productIndex), forKey: kProductsKey)
-        }
-    }
-    
-    class func indexOfProductWithId(productId : Int?) -> Int?
-    {
-        if let productId = productId, index = productsInCart.indexOf({($0.id?.integerValue ?? -1) == productId})
-        {
-            return index
-        }
-        else
-        {
-            return nil
-        }
-    }
-    
     private class var productsInCart : [Product]
     {
         set
         {
             setGenericValueForKey(newValue.map({$0.toNonNullDictionary}) , forKey: kProductsKey)
-            
-            NSNotificationCenter.quickPost(kNotificationCartItemsChanged)
         }
         
         get

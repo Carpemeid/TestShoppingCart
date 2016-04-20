@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireJsonToObjects
 import EVReflection
 
-class NetworkManager
+class NetworkManager <T : EVObject>
 {
     //MARK: - Class functions
     class func GET() -> NetworkManager
@@ -45,34 +45,61 @@ class NetworkManager
     }
     
     //MARK: - Request constructor
-    private func requestInstanceWithURLString(URLString : URLStringConvertible, parameters : [String : AnyObject]?, inBackground : Bool) -> (request : Request,queue : dispatch_queue_t)
+    private func requestInstanceWithURLString(URLString : URLStringConvertible, parameters : [String : AnyObject]?, inBackground : Bool) -> (request : Request,queue : dispatch_queue_t)?
     {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        let queue : dispatch_queue_t = inBackground ? dispatch_queue_create("alamofire-background-queue", DISPATCH_QUEUE_CONCURRENT) : dispatch_get_main_queue()
-        
-        return (request(requestType, URLString, parameters: parameters, encoding: parameterEncoding, headers: nil), queue)
-    }
-    
-    func objectAt<T : EVObject>(URLString : URLStringConvertible, withParameters parameters : [String : AnyObject]?, inBackground : Bool, withResponseHandler responseHandler : (result : Result<T, NSError>) -> Void)
-    {
-        let instance : (request : Request, queue : dispatch_queue_t) = requestInstanceWithURLString(URLString, parameters: parameters, inBackground: inBackground)
-        
-        instance.request.responseObject(instance.queue, encoding: NSUTF8StringEncoding) { (request : NSURLRequest?, response : NSHTTPURLResponse?, result : Result<T, NSError>) in
+        if ConnectionChecker.checkInternetConnection()
+        {
+            let queue : dispatch_queue_t = inBackground ? dispatch_queue_create("alamofire-background-queue", DISPATCH_QUEUE_CONCURRENT) : dispatch_get_main_queue()
             
+            let localRequest : Request = request(requestType, URLString, parameters: parameters, encoding: parameterEncoding, headers: nil)
+            
+            print("request url is \(localRequest.request?.URL)")
+            
+            return (localRequest, queue)
+        }
+        else
+        {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            responseHandler(result: result)
+            
+            return nil
         }
     }
     
-    func arrayAt<T : EVObject>(URLString : URLStringConvertible, withParameters parameters : [String : AnyObject]?, inBackground : Bool, withResponseHandler responseHandler : (result : Result<[T], NSError>) -> Void)
+    func objectAt(URLString : URLStringConvertible, withParameters parameters : [String : AnyObject]?, inBackground : Bool, withResponseHandler responseHandler : (result : Result<T, NSError>) -> Void)
     {
-        let instance : (request : Request, queue : dispatch_queue_t) = requestInstanceWithURLString(URLString, parameters: parameters, inBackground: inBackground)
-        
-        instance.request.responseArray(instance.queue, encoding: NSUTF8StringEncoding) { (request : NSURLRequest?, response : NSHTTPURLResponse?, result : Result<[T], NSError>) in
+        if let instance = requestInstanceWithURLString(URLString, parameters: parameters, inBackground: inBackground)
+        {
+            instance.request.responseObject(instance.queue, encoding: NSUTF8StringEncoding) { (request : NSURLRequest?, response : NSHTTPURLResponse?, result : Result<T, NSError>) in
             
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            responseHandler(result: result)
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                responseHandler(result: result)
+            }
+        }
+        else
+        {
+            Alertor.noInternet()
+            
+            responseHandler(result: Result.Failure(NSError(domain: "No internet", code: 404, userInfo: nil)))
+        }
+    }
+    
+    func arrayAt(URLString : URLStringConvertible, withParameters parameters : [String : AnyObject]?, inBackground : Bool, withResponseHandler responseHandler : (result : Result<[T], NSError>) -> Void)
+    {
+        if let instance = requestInstanceWithURLString(URLString, parameters: parameters, inBackground: inBackground)
+        {
+            instance.request.responseArray(instance.queue, encoding: NSUTF8StringEncoding) { (request : NSURLRequest?, response : NSHTTPURLResponse?, result : Result<[T], NSError>) in
+            
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                responseHandler(result: result)
+            }
+        }
+        else
+        {
+            Alertor.noInternet()
+            
+            responseHandler(result: Result.Failure(NSError(domain: "No internet", code: 404, userInfo: nil)))
         }
     }
 }
