@@ -12,11 +12,11 @@ import EVReflection
 class Product: EVObject {
     
     var id : NSNumber?
-    var name : String = ""
-    var category : String = ""
+    var name : String?
+    var category : String?
     var price : NSNumber?
-    var _description : String = ""
+    var _description : String?
     var under_sale : NSNumber?
     
-    var img_url : String = ""
+    var img_url : String?
 }

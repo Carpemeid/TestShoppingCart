@@ -22,7 +22,7 @@ class CategoryFilterController: UIViewController, UITableViewDataSource, UITable
     //MARK: iVars
     var parent : FiltersControllerDelegate?
     var selectedCategoryName : String?
-    var categories : [String] = Register.cachedCategories
+    var categories : [String] = register.cachedCategories
     
     //MARK: View life cycle
 

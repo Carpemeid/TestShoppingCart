@@ -29,16 +29,6 @@ class ParametersManager
         }
 
         return parameters
-//        print("the used parameters will be \(parameters.map{URLParameterWithParameterName($0.parameterKey, andValue: $0.parameterValue)}.joinWithSeparator("&"))")
-//        
-//        return parameters.map{URLParameterWithParameterName($0.parameterKey, andValue: $0.parameterValue)}.joinWithSeparator("&")
-    }
-    
-    
-    
-    private class func URLParameterWithParameterName(parameterName : String, andValue parameterValue : String) -> String
-    {
-        return "\(parameterName)=\(parameterValue)"
     }
     
 }

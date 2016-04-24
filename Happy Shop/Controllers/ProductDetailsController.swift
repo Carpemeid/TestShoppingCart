@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductDetailsController: UIViewController {
+class ProductDetailsController: ListenerController {
 
     //MARK: Outlets
     @IBOutlet weak var productImageView: UIImageView!
@@ -78,7 +78,7 @@ class ProductDetailsController: UIViewController {
                 onSaleLabel.hidden = !onSale
             }
             
-            if let _ = Register.indexOfProductWithId(product.id?.integerValue)
+            if let _ = register.indexOfProductWithId(product.id?.integerValue)
             {
                 configureAddToCartButtonWithState(true)
             }
@@ -93,18 +93,26 @@ class ProductDetailsController: UIViewController {
     //MARK: Events
     @IBAction func addToCartAction(sender: AnyObject) {
         
-        if let _ = Register.indexOfProductWithId(product?.id?.integerValue)
+        if let _ = register.indexOfProductWithId(product?.id?.integerValue)
         {
-            Register.removeProductFromCart(product?.id?.integerValue)
+            register.removeProductFromCart(product?.id?.integerValue)
             
             configureAddToCartButtonWithState(false)
         }
         else
         {
-            Register.addProductToCart(product)
+            register.addProductToCart(product)
             configureAddToCartButtonWithState(true)
         }
-        
     }
     
+    func checkProductStatus()
+    {
+        configureAddToCartButtonWithState(register.indexOfProductWithId(product?.id?.integerValue) != .None)
+    }
+    
+    //MARK: Notifications
+    override func listenerMethods() -> [(notificationName: String, methodName: String)] {
+        return [(kNotificationCartItemsChanged, "checkProductStatus")]
+    }
 }

@@ -15,21 +15,14 @@ private let kSegueToDetails : String = "toDetails"
 private let kTabTitleShoppingCart : String = "Shopping cart"
 private let kRefreshBadgeMethod : String = "refreshBadge"
 
-private let kCollectionViewMarginOffset : CGFloat = 5
-private let kCollectionViewCellSpacing : CGFloat = 5
-private let kCollectionViewCellsPerRow : Int = 2
-private let kCollectionViewLoadingFooterHeight : CGFloat = 40
-
-private let kCollectionViewCellReuseIdentifier : String = "cell"
-private let kCollectionViewHeaderReuseIdentifier : String = "header"
-private let kCollectionViewFooterReuseIdentifier : String = "footer"
-
-class CategoriesController: ListenerController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, FiltersControllerDelegate, UIScrollViewDelegate {
+class CategoriesController: ListenerController, FiltersControllerDelegate,ProductsCollectionDelegateProtocol {
 
     //MARK: Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: iVars
+    var collectionDelegate : ProductsCollectionDelegate!
+    
     var selectedCategory : String?
     {
         didSet
@@ -39,10 +32,23 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     }
     
     var shouldReplaceProducts : Bool = false
-    var hasAdditionalRow : Bool = false
+    
     var cantBePaginated : Bool = false
+    {
+        didSet
+        {
+            collectionDelegate.cantBePaginated = cantBePaginated
+        }
+    }
     
     var currentPage : Int?
+    {
+        didSet
+        {
+            collectionDelegate.currentPage = currentPage
+        }
+    }
+    
     var refreshControl : UIRefreshControl = UIRefreshControl()
     var filtersNavigationController : UINavigationController?
     
@@ -54,35 +60,11 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
         }
     }
     
-    var products : [Product] = []
-    {
-        didSet
-        {
-            productsInCategories = ProductListResponse.productsInCategoriesFromProducts(products)
-        }
-    }
-    
-    var productsInCategories : [String : [Product]] = [:]
-    {
-        didSet
-        {
-            categories = Array(productsInCategories.keys)
-            
-            collectionView?.reloadData()
-        }
-    }
-    
-    var categories : [String] = []
-    {
-        didSet
-        {
-            Register.cachedCategories = categories
-        }
-    }
-    
     //MARK: View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionDelegate = ProductsCollectionDelegate(collectionView: collectionView, delegate: self, isShoppingCartDelegate: isShoppingCartController)
         
         loadData()
         configureRefreshController()
@@ -103,14 +85,14 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     {
         if isShoppingCartController
         {
-            var localProducts : [Product] = Register.cachedProductsInCart
+            var localProducts : [Product] = register.cachedProductsInCart
             
             if let selectedCategory = selectedCategory
             {
                 localProducts = localProducts.filter({$0.category == selectedCategory})
             }
             
-            products = localProducts
+            collectionDelegate.products = localProducts
             refreshControl.endRefreshing()
             collectionView?.reloadData()
         }
@@ -136,74 +118,29 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
             
             if self.shouldReplaceProducts
             {
-                self.products = products
+                self.collectionDelegate.products = products
                 self.shouldReplaceProducts = false
             }
             else
             {
-                self.products.appendContentsOf(products)
+                self.collectionDelegate.products.appendContentsOf(products)
             }
     
             self.refreshControl.endRefreshing()
             
-            self.hideFooter()
+            self.collectionDelegate.hideFooterInCategory(self.selectedCategory)
             
             if !atNextPage
             {
-                self.collectionView.collectionViewLayout.collectionViewContentSize()
-                
-                //because force scrolling gets interrupted while layout processes happen
-                NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: #selector(CategoriesController.scrollToTop), userInfo: nil, repeats: false)
+                self.collectionDelegate.scrollToTop()
             }
         }
     }
     
-    func scrollToTop()
-    {
-        collectionView.setContentOffset(CGPointMake(0, self.collectionView.frame.origin.y - 64), animated: true)
-    }
-    
     //MARK: Collection view delegate methods
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return productsInCategories.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        var numberOfItems : Int = (productsInCategories[categories[section]]?.count ?? 0)
-        
-        if currentPage != .None && !cantBePaginated && !needsHiddenFooter && !isShoppingCartController
-        {
-            numberOfItems += 1
-            hasAdditionalRow = true
-        }
-        else
-        {
-            hasAdditionalRow = false
-        }
-        
-        return numberOfItems
-    }
-    
-    func isLoadingIndexPath(indexPath : NSIndexPath ) -> Bool
+    func collectionViewDidSelectProduct(product : Product)
     {
-        return hasAdditionalRow && indexPath.row == (productsInCategories[categories[indexPath.section]]?.count ?? 0)
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let categoryCell : UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(isLoadingIndexPath(indexPath) ? kCollectionViewFooterReuseIdentifier : kCollectionViewCellReuseIdentifier, forIndexPath: indexPath)
-        
-        if let categoryCell = categoryCell as? CategoryCell
-        {
-            categoryCell.configureWithProduct(productsInCategories[categories[indexPath.section]]?[indexPath.row])
-        }
-        else
-        {
-            requestNewPage()
-        }
-        
-        return categoryCell
+        performSegueWithIdentifier(kSegueToDetails, sender: product)
     }
     
     func requestNewPage()
@@ -212,50 +149,6 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
         {
             loadData(true)
         }
-    }
-    
-    var needsHiddenFooter : Bool = false
-    
-    func hideFooter()
-    {
-        if let selectedCategory = selectedCategory, items = productsInCategories[selectedCategory], cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: items.count, inSection: 0)) where !(cell is CategoryCell)
-        {
-            needsHiddenFooter = true
-            collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: items.count, inSection: 0)])
-            needsHiddenFooter = false
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
-    {
-        if kind == UICollectionElementKindSectionHeader
-        {
-            let headerView : CategoryHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: kCollectionViewHeaderReuseIdentifier, forIndexPath: indexPath) as! CategoryHeaderView
-            
-            headerView.cateogryNameLabel.text = categories[indexPath.section]
-            
-            return headerView
-        }
-        else
-        {
-            assert(false, "Unexpected element kind")
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier(kSegueToDetails, sender: self)
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
-    {
-        return isLoadingIndexPath(indexPath) ? CGSizeMake(collectionView.frame.width - 2*kCollectionViewMarginOffset, kCollectionViewLoadingFooterHeight) : CGSizeMake(cellEdge, cellEdge)
-    }
-    
-    var cellEdge : CGFloat
-    {
-        let emptySpace : CGFloat = kCollectionViewMarginOffset * 2 + kCollectionViewCellSpacing
-        
-        return (UIScreen.mainScreen().bounds.width - emptySpace) / CGFloat(kCollectionViewCellsPerRow)
     }
     
     //MARK: Filters delegate methods
@@ -279,7 +172,6 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     {
         refreshControl.addTarget(self, action: #selector(CategoriesController.resetCategory), forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
-        collectionView.alwaysBounceVertical = true
     }
     
     func configureShoppingCartView()
@@ -292,8 +184,12 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
     
     func refreshBadge()
     {
-        navigationController?.tabBarItem.badgeValue = Register.cachedProductsInCart.count == 0 ? nil : "\(Register.cachedProductsInCart.count)"
-        loadData()
+        navigationController?.tabBarItem.badgeValue = register.cachedProductsInCart.count == 0 ? nil : "\(register.cachedProductsInCart.count)"
+        
+        if isViewLoaded()
+        {
+            loadData()
+        }
     }
     
     //MARK: Navigation
@@ -306,7 +202,7 @@ class CategoriesController: ListenerController, UICollectionViewDataSource, UICo
             filtersController.selectedCategoryName = selectedCategory
         }
         
-        if let controller = segue.destinationViewController as? ProductDetailsController, index = collectionView.indexPathsForSelectedItems()?.first, product = productsInCategories[ categories[index.section]]?[index.row]
+        if let controller = segue.destinationViewController as? ProductDetailsController, product = sender as? Product
         {
             controller.product = product
         }

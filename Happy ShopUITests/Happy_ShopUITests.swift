@@ -31,6 +31,9 @@ class Happy_ShopUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCUIApplication().collectionViews.childrenMatchingType(.Cell).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Image).element.tap()
+        
+        
     }
     
 }

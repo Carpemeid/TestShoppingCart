@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C003F811CC4F3280086877B /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003F801CC4F3280086877B /* CategoriesController.swift */; };
 		3C003F831CC4F3830086877B /* Categories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C003F821CC4F3830086877B /* Categories.storyboard */; };
 		3C003F881CC4F5F60086877B /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003F871CC4F5F60086877B /* Register.swift */; };
 		3C003F8B1CC4F6660086877B /* ExtensionNSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003F8A1CC4F6660086877B /* ExtensionNSNotificationCenter.swift */; };
@@ -18,21 +17,39 @@
 		3C003FAF1CC565FC0086877B /* CategoryFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FAE1CC565FC0086877B /* CategoryFilterController.swift */; };
 		3C003FB21CC5A6A80086877B /* ExtensionEVObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FB11CC5A6A80086877B /* ExtensionEVObject.swift */; };
 		3C003FB61CC69EDD0086877B /* ProductDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C003FB51CC69EDD0086877B /* ProductDetailsController.swift */; };
-		3CCD56931CC8088C002AF042 /* Alertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD56921CC8088C002AF042 /* Alertor.swift */; };
+		3C4AFF141CC903D3006BAE07 /* ConnectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF111CC903D3006BAE07 /* ConnectionChecker.swift */; };
+		3C4AFF151CC903D3006BAE07 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF131CC903D3006BAE07 /* Reachability.m */; };
+		3C4AFF191CC9441F006BAE07 /* MockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF181CC9441F006BAE07 /* MockHelper.swift */; };
+		3C4AFF1B1CC94552006BAE07 /* ProductMockHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF1A1CC94552006BAE07 /* ProductMockHelper.swift */; };
+		3C4AFF261CC95EEC006BAE07 /* Alertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF231CC95EEC006BAE07 /* Alertor.swift */; };
+		3C4AFF271CC95EEC006BAE07 /* AlertorMinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF241CC95EEC006BAE07 /* AlertorMinion.swift */; };
+		3C4AFF281CC95EEC006BAE07 /* AlertorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF251CC95EEC006BAE07 /* AlertorProtocol.swift */; };
+		3C4AFF2A1CC95F45006BAE07 /* ConnectionCheckerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF291CC95F45006BAE07 /* ConnectionCheckerProtocol.swift */; };
+		3C4AFF2F1CC9612B006BAE07 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF2E1CC9612B006BAE07 /* NetworkManagerTest.swift */; };
+		3C4AFF311CC9618F006BAE07 /* AlertorMinionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF301CC9618F006BAE07 /* AlertorMinionMock.swift */; };
+		3C4AFF331CC963E2006BAE07 /* ConnectionCheckerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF321CC963E2006BAE07 /* ConnectionCheckerMock.swift */; };
+		3C4AFF351CC96D85006BAE07 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF341CC96D85006BAE07 /* NetworkManagerProtocol.swift */; };
+		3C4AFF391CC9733E006BAE07 /* NetworkManagerMinionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4AFF381CC9733E006BAE07 /* NetworkManagerMinionMock.swift */; };
+		3CCAE2CE1CCB851300AF6E19 /* URLConstructorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2CD1CCB851300AF6E19 /* URLConstructorTest.swift */; };
+		3CCAE2D01CCBBCD000AF6E19 /* ParametersManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2CF1CCBBCD000AF6E19 /* ParametersManagerTest.swift */; };
+		3CCAE2D21CCCE35B00AF6E19 /* DiskSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2D11CCCE35A00AF6E19 /* DiskSaver.swift */; };
+		3CCAE2D41CCCE9BD00AF6E19 /* DiskNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2D31CCCE9BD00AF6E19 /* DiskNotifier.swift */; };
+		3CCAE2D71CCCECAD00AF6E19 /* RegiterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2D61CCCECAD00AF6E19 /* RegiterTest.swift */; };
+		3CCAE2D91CCCECCF00AF6E19 /* DiskNotifierMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2D81CCCECCF00AF6E19 /* DiskNotifierMock.swift */; };
+		3CCAE2DB1CCCED1000AF6E19 /* DiskSaverMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2DA1CCCED1000AF6E19 /* DiskSaverMock.swift */; };
+		3CCAE2E01CCD4B2600AF6E19 /* ProductsCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2DF1CCD4B2600AF6E19 /* ProductsCollectionDelegate.swift */; };
+		3CCAE2E41CCD53C400AF6E19 /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAE2E31CCD53C400AF6E19 /* CategoriesController.swift */; };
+		3CCD56951CC81C76002AF042 /* ProductListResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD56941CC81C76002AF042 /* ProductListResponseTest.swift */; };
 		3CDD0FD31CC16FE4004023C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD0FD21CC16FE4004023C7 /* AppDelegate.swift */; };
 		3CDD0FDC1CC16FE4004023C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CDD0FDB1CC16FE4004023C7 /* Assets.xcassets */; };
-		3CDD0FEA1CC16FE4004023C7 /* Happy_ShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD0FE91CC16FE4004023C7 /* Happy_ShopTests.swift */; };
 		3CDD0FF51CC16FE4004023C7 /* Happy_ShopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD0FF41CC16FE4004023C7 /* Happy_ShopUITests.swift */; };
 		3CDD100B1CC17BA7004023C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDD10091CC17BA7004023C7 /* LaunchScreen.storyboard */; };
 		3CDD100E1CC17BAD004023C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CDD100C1CC17BAD004023C7 /* Main.storyboard */; };
-		3CDD10131CC17C41004023C7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10121CC17C41004023C7 /* Reachability.m */; };
-		3CDD10151CC17C57004023C7 /* ConnectionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10141CC17C57004023C7 /* ConnectionChecker.swift */; };
 		3CDD10171CC17C79004023C7 /* URLConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10161CC17C79004023C7 /* URLConstructor.swift */; };
 		3CDD10191CC17DE0004023C7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10181CC17DE0004023C7 /* NetworkManager.swift */; };
 		3CDD101D1CC18002004023C7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD101C1CC18002004023C7 /* Product.swift */; };
 		3CDD10201CC3F40B004023C7 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD101F1CC3F40B004023C7 /* Networker.swift */; };
 		3CDD10221CC4105A004023C7 /* ParametersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10211CC4105A004023C7 /* ParametersManager.swift */; };
-		3CDD10251CC4129C004023C7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10241CC4129C004023C7 /* ViewController.swift */; };
 		3CDD10271CC4182D004023C7 /* ProductResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10261CC4182D004023C7 /* ProductResponse.swift */; };
 		3CDD10291CC41851004023C7 /* ProductListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDD10281CC41851004023C7 /* ProductListResponse.swift */; };
 		FBE1370F488E9A8E864DCC33 /* Pods_Happy_Shop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ACB2332F36DA82E8B6288A /* Pods_Happy_Shop.framework */; };
@@ -59,7 +76,6 @@
 		0075F1C684B3F60218FA37BB /* Pods-Happy Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happy Shop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happy Shop/Pods-Happy Shop.release.xcconfig"; sourceTree = "<group>"; };
 		09ACB2332F36DA82E8B6288A /* Pods_Happy_Shop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Happy_Shop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34533F31B9979D4935459D76 /* Pods-Happy Shop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happy Shop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Happy Shop/Pods-Happy Shop.debug.xcconfig"; sourceTree = "<group>"; };
-		3C003F801CC4F3280086877B /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		3C003F821CC4F3830086877B /* Categories.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Categories.storyboard; sourceTree = "<group>"; };
 		3C003F871CC4F5F60086877B /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		3C003F8A1CC4F6660086877B /* ExtensionNSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionNSNotificationCenter.swift; sourceTree = "<group>"; };
@@ -70,13 +86,35 @@
 		3C003FAE1CC565FC0086877B /* CategoryFilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryFilterController.swift; sourceTree = "<group>"; };
 		3C003FB11CC5A6A80086877B /* ExtensionEVObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionEVObject.swift; sourceTree = "<group>"; };
 		3C003FB51CC69EDD0086877B /* ProductDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsController.swift; sourceTree = "<group>"; };
-		3CCD56921CC8088C002AF042 /* Alertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertor.swift; sourceTree = "<group>"; };
+		3C4AFF111CC903D3006BAE07 /* ConnectionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionChecker.swift; sourceTree = "<group>"; };
+		3C4AFF121CC903D3006BAE07 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3C4AFF131CC903D3006BAE07 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3C4AFF181CC9441F006BAE07 /* MockHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockHelper.swift; sourceTree = "<group>"; };
+		3C4AFF1A1CC94552006BAE07 /* ProductMockHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMockHelper.swift; sourceTree = "<group>"; };
+		3C4AFF231CC95EEC006BAE07 /* Alertor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertor.swift; sourceTree = "<group>"; };
+		3C4AFF241CC95EEC006BAE07 /* AlertorMinion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertorMinion.swift; sourceTree = "<group>"; };
+		3C4AFF251CC95EEC006BAE07 /* AlertorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertorProtocol.swift; sourceTree = "<group>"; };
+		3C4AFF291CC95F45006BAE07 /* ConnectionCheckerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCheckerProtocol.swift; sourceTree = "<group>"; };
+		3C4AFF2E1CC9612B006BAE07 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
+		3C4AFF301CC9618F006BAE07 /* AlertorMinionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertorMinionMock.swift; sourceTree = "<group>"; };
+		3C4AFF321CC963E2006BAE07 /* ConnectionCheckerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCheckerMock.swift; sourceTree = "<group>"; };
+		3C4AFF341CC96D85006BAE07 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
+		3C4AFF381CC9733E006BAE07 /* NetworkManagerMinionMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerMinionMock.swift; sourceTree = "<group>"; };
+		3CCAE2CD1CCB851300AF6E19 /* URLConstructorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstructorTest.swift; sourceTree = "<group>"; };
+		3CCAE2CF1CCBBCD000AF6E19 /* ParametersManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersManagerTest.swift; sourceTree = "<group>"; };
+		3CCAE2D11CCCE35A00AF6E19 /* DiskSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskSaver.swift; sourceTree = "<group>"; };
+		3CCAE2D31CCCE9BD00AF6E19 /* DiskNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskNotifier.swift; sourceTree = "<group>"; };
+		3CCAE2D61CCCECAD00AF6E19 /* RegiterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegiterTest.swift; sourceTree = "<group>"; };
+		3CCAE2D81CCCECCF00AF6E19 /* DiskNotifierMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskNotifierMock.swift; sourceTree = "<group>"; };
+		3CCAE2DA1CCCED1000AF6E19 /* DiskSaverMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskSaverMock.swift; sourceTree = "<group>"; };
+		3CCAE2DF1CCD4B2600AF6E19 /* ProductsCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCollectionDelegate.swift; sourceTree = "<group>"; };
+		3CCAE2E31CCD53C400AF6E19 /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
+		3CCD56941CC81C76002AF042 /* ProductListResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListResponseTest.swift; sourceTree = "<group>"; };
 		3CDD0FCF1CC16FE4004023C7 /* Happy Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDD0FD21CC16FE4004023C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CDD0FDB1CC16FE4004023C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		3CDD0FE01CC16FE4004023C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		3CDD0FE51CC16FE4004023C7 /* Happy ShopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Happy ShopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CDD0FE91CC16FE4004023C7 /* Happy_ShopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happy_ShopTests.swift; sourceTree = "<group>"; };
 		3CDD0FEB1CC16FE4004023C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CDD0FF01CC16FE4004023C7 /* Happy ShopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Happy ShopUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDD0FF41CC16FE4004023C7 /* Happy_ShopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Happy_ShopUITests.swift; sourceTree = "<group>"; };
@@ -84,15 +122,11 @@
 		3CDD100A1CC17BA7004023C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Happy Shop/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		3CDD100D1CC17BAD004023C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Happy Shop/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		3CDD10101CC17C40004023C7 /* Happy Shop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Happy Shop-Bridging-Header.h"; path = "../Tools/Networking/Happy Shop-Bridging-Header.h"; sourceTree = "<group>"; };
-		3CDD10111CC17C41004023C7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		3CDD10121CC17C41004023C7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		3CDD10141CC17C57004023C7 /* ConnectionChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionChecker.swift; sourceTree = "<group>"; };
 		3CDD10161CC17C79004023C7 /* URLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstructor.swift; sourceTree = "<group>"; };
 		3CDD10181CC17DE0004023C7 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3CDD101C1CC18002004023C7 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		3CDD101F1CC3F40B004023C7 /* Networker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 		3CDD10211CC4105A004023C7 /* ParametersManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersManager.swift; sourceTree = "<group>"; };
-		3CDD10241CC4129C004023C7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3CDD10261CC4182D004023C7 /* ProductResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductResponse.swift; sourceTree = "<group>"; };
 		3CDD10281CC41851004023C7 /* ProductListResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				3C003F871CC4F5F60086877B /* Register.swift */,
+				3CCAE2D11CCCE35A00AF6E19 /* DiskSaver.swift */,
+				3CCAE2D31CCCE9BD00AF6E19 /* DiskNotifier.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -154,6 +190,56 @@
 				3C003FB11CC5A6A80086877B /* ExtensionEVObject.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3C4AFF101CC9039D006BAE07 /* ConnectionChecker */ = {
+			isa = PBXGroup;
+			children = (
+				3C4AFF111CC903D3006BAE07 /* ConnectionChecker.swift */,
+				3C4AFF121CC903D3006BAE07 /* Reachability.h */,
+				3C4AFF131CC903D3006BAE07 /* Reachability.m */,
+				3C4AFF291CC95F45006BAE07 /* ConnectionCheckerProtocol.swift */,
+			);
+			path = ConnectionChecker;
+			sourceTree = "<group>";
+		};
+		3C4AFF221CC95E91006BAE07 /* Alertor */ = {
+			isa = PBXGroup;
+			children = (
+				3C4AFF231CC95EEC006BAE07 /* Alertor.swift */,
+				3C4AFF241CC95EEC006BAE07 /* AlertorMinion.swift */,
+				3C4AFF251CC95EEC006BAE07 /* AlertorProtocol.swift */,
+			);
+			path = Alertor;
+			sourceTree = "<group>";
+		};
+		3C4AFF2D1CC96101006BAE07 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				3C4AFF2E1CC9612B006BAE07 /* NetworkManagerTest.swift */,
+				3C4AFF301CC9618F006BAE07 /* AlertorMinionMock.swift */,
+				3C4AFF321CC963E2006BAE07 /* ConnectionCheckerMock.swift */,
+				3C4AFF381CC9733E006BAE07 /* NetworkManagerMinionMock.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		3CCAE2D51CCCEC7F00AF6E19 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				3CCAE2D61CCCECAD00AF6E19 /* RegiterTest.swift */,
+				3CCAE2D81CCCECCF00AF6E19 /* DiskNotifierMock.swift */,
+				3CCAE2DA1CCCED1000AF6E19 /* DiskSaverMock.swift */,
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
+		3CCAE2DE1CCD4AFF00AF6E19 /* CollectionDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3CCAE2DF1CCD4B2600AF6E19 /* ProductsCollectionDelegate.swift */,
+			);
+			path = CollectionDelegate;
 			sourceTree = "<group>";
 		};
 		3CDD0FC61CC16FE4004023C7 = {
@@ -194,8 +280,14 @@
 		3CDD0FE81CC16FE4004023C7 /* Happy ShopTests */ = {
 			isa = PBXGroup;
 			children = (
-				3CDD0FE91CC16FE4004023C7 /* Happy_ShopTests.swift */,
+				3CCAE2D51CCCEC7F00AF6E19 /* Persistance */,
+				3C4AFF2D1CC96101006BAE07 /* NetworkManager */,
+				3CCD56941CC81C76002AF042 /* ProductListResponseTest.swift */,
 				3CDD0FEB1CC16FE4004023C7 /* Info.plist */,
+				3C4AFF181CC9441F006BAE07 /* MockHelper.swift */,
+				3C4AFF1A1CC94552006BAE07 /* ProductMockHelper.swift */,
+				3CCAE2CD1CCB851300AF6E19 /* URLConstructorTest.swift */,
+				3CCAE2CF1CCBBCD000AF6E19 /* ParametersManagerTest.swift */,
 			);
 			path = "Happy ShopTests";
 			sourceTree = "<group>";
@@ -212,9 +304,9 @@
 		3CDD10021CC16FF2004023C7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3CCAE2DE1CCD4AFF00AF6E19 /* CollectionDelegate */,
 				3C003F8C1CC4F6800086877B /* ListenerController.swift */,
-				3CDD10241CC4129C004023C7 /* ViewController.swift */,
-				3C003F801CC4F3280086877B /* CategoriesController.swift */,
+				3CCAE2E31CCD53C400AF6E19 /* CategoriesController.swift */,
 				3C003F921CC5250B0086877B /* MainTabBarController.swift */,
 				3C003FAE1CC565FC0086877B /* CategoryFilterController.swift */,
 				3C003FB51CC69EDD0086877B /* ProductDetailsController.swift */,
@@ -225,7 +317,7 @@
 		3CDD10031CC16FF6004023C7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				3CCD56921CC8088C002AF042 /* Alertor.swift */,
+				3C4AFF221CC95E91006BAE07 /* Alertor */,
 				3C003FB01CC5A6900086877B /* Extensions */,
 				3C003F891CC4F64F0086877B /* Notifications */,
 				3C003F861CC4F5E10086877B /* Persistance */,
@@ -277,13 +369,12 @@
 		3CDD100F1CC17C29004023C7 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				3C4AFF101CC9039D006BAE07 /* ConnectionChecker */,
 				3CDD10211CC4105A004023C7 /* ParametersManager.swift */,
 				3CDD10181CC17DE0004023C7 /* NetworkManager.swift */,
 				3CDD10161CC17C79004023C7 /* URLConstructor.swift */,
-				3CDD10141CC17C57004023C7 /* ConnectionChecker.swift */,
-				3CDD10111CC17C41004023C7 /* Reachability.h */,
-				3CDD10121CC17C41004023C7 /* Reachability.m */,
 				3CDD101F1CC3F40B004023C7 /* Networker.swift */,
+				3C4AFF341CC96D85006BAE07 /* NetworkManagerProtocol.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -479,26 +570,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CCAE2D21CCCE35B00AF6E19 /* DiskSaver.swift in Sources */,
 				3C003F901CC513600086877B /* CategoryCell.swift in Sources */,
+				3C4AFF2A1CC95F45006BAE07 /* ConnectionCheckerProtocol.swift in Sources */,
+				3CCAE2E41CCD53C400AF6E19 /* CategoriesController.swift in Sources */,
 				3C003FB21CC5A6A80086877B /* ExtensionEVObject.swift in Sources */,
 				3C003FAD1CC562B90086877B /* CategoryHeaderView.swift in Sources */,
+				3C4AFF281CC95EEC006BAE07 /* AlertorProtocol.swift in Sources */,
+				3C4AFF141CC903D3006BAE07 /* ConnectionChecker.swift in Sources */,
 				3CDD10171CC17C79004023C7 /* URLConstructor.swift in Sources */,
 				3C003F8B1CC4F6660086877B /* ExtensionNSNotificationCenter.swift in Sources */,
+				3C4AFF351CC96D85006BAE07 /* NetworkManagerProtocol.swift in Sources */,
+				3C4AFF271CC95EEC006BAE07 /* AlertorMinion.swift in Sources */,
 				3CDD10221CC4105A004023C7 /* ParametersManager.swift in Sources */,
-				3CDD10151CC17C57004023C7 /* ConnectionChecker.swift in Sources */,
-				3CDD10251CC4129C004023C7 /* ViewController.swift in Sources */,
 				3C003F881CC4F5F60086877B /* Register.swift in Sources */,
-				3CCD56931CC8088C002AF042 /* Alertor.swift in Sources */,
 				3CDD10291CC41851004023C7 /* ProductListResponse.swift in Sources */,
+				3C4AFF261CC95EEC006BAE07 /* Alertor.swift in Sources */,
+				3C4AFF151CC903D3006BAE07 /* Reachability.m in Sources */,
 				3C003FB61CC69EDD0086877B /* ProductDetailsController.swift in Sources */,
 				3CDD10201CC3F40B004023C7 /* Networker.swift in Sources */,
-				3C003F811CC4F3280086877B /* CategoriesController.swift in Sources */,
+				3CCAE2D41CCCE9BD00AF6E19 /* DiskNotifier.swift in Sources */,
 				3CDD10191CC17DE0004023C7 /* NetworkManager.swift in Sources */,
 				3CDD10271CC4182D004023C7 /* ProductResponse.swift in Sources */,
-				3CDD10131CC17C41004023C7 /* Reachability.m in Sources */,
 				3C003F8D1CC4F6800086877B /* ListenerController.swift in Sources */,
 				3CDD0FD31CC16FE4004023C7 /* AppDelegate.swift in Sources */,
 				3C003FAF1CC565FC0086877B /* CategoryFilterController.swift in Sources */,
+				3CCAE2E01CCD4B2600AF6E19 /* ProductsCollectionDelegate.swift in Sources */,
 				3CDD101D1CC18002004023C7 /* Product.swift in Sources */,
 				3C003F931CC5250B0086877B /* MainTabBarController.swift in Sources */,
 			);
@@ -508,7 +605,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CDD0FEA1CC16FE4004023C7 /* Happy_ShopTests.swift in Sources */,
+				3C4AFF191CC9441F006BAE07 /* MockHelper.swift in Sources */,
+				3CCAE2CE1CCB851300AF6E19 /* URLConstructorTest.swift in Sources */,
+				3C4AFF1B1CC94552006BAE07 /* ProductMockHelper.swift in Sources */,
+				3C4AFF391CC9733E006BAE07 /* NetworkManagerMinionMock.swift in Sources */,
+				3CCAE2D71CCCECAD00AF6E19 /* RegiterTest.swift in Sources */,
+				3CCD56951CC81C76002AF042 /* ProductListResponseTest.swift in Sources */,
+				3CCAE2D91CCCECCF00AF6E19 /* DiskNotifierMock.swift in Sources */,
+				3C4AFF311CC9618F006BAE07 /* AlertorMinionMock.swift in Sources */,
+				3C4AFF2F1CC9612B006BAE07 /* NetworkManagerTest.swift in Sources */,
+				3CCAE2DB1CCCED1000AF6E19 /* DiskSaverMock.swift in Sources */,
+				3C4AFF331CC963E2006BAE07 /* ConnectionCheckerMock.swift in Sources */,
+				3CCAE2D01CCBBCD000AF6E19 /* ParametersManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

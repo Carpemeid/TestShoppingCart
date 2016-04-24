@@ -11,10 +11,40 @@ import Foundation
 private let kProductsKey : String = "products"
 private let kCategoriesKey : String = "categories"
 
+var register : Register
+{
+    return Register.sharedInstance
+}
+
 class Register : NSObject
 {
+    //MARK: Singleton
+    static let sharedInstance : Register = Register(localDiskSaver: DiskSaver(), localDiskNotifier: DiskNotifier())
+    
+    //MARK: iVars
+    private var diskSaver : DiskSaverProtocol
+    private var localCategories : [String] = []
+    private var diskNotifier : DiskNotifierProtocol
+    
+    
     //MARK: Cached data
-    static var cachedCategories : [String]
+    var cachedProductsInCart : [Product]
+    {
+        get
+        {
+            return _cachedProductsInCart
+        }
+    }
+    
+    private var _cachedProductsInCart : [Product] = []
+    {
+        didSet
+        {
+            diskNotifier.didChangeProductsInCart()
+        }
+    }
+    
+    var cachedCategories : [String]
     {
         set
         {
@@ -30,19 +60,34 @@ class Register : NSObject
         }
     }
     
-    private static var localCategories : [String] = Register.categories
-    
-    static var cachedProductsInCart : [Product] = Register.productsInCart
+    init(localDiskSaver : DiskSaverProtocol, localDiskNotifier : DiskNotifierProtocol)
     {
-        didSet
+        diskSaver = localDiskSaver
+        diskNotifier = localDiskNotifier
+        super.init()
+        localCategories = categories
+        _cachedProductsInCart = productsInCart
+    }
+    
+    func addProductToCart(product : Product?)
+    {
+        if let product = product where product.id != .None && indexOfProductWithId(product.id?.integerValue) == .None
         {
-            NSNotificationCenter.quickPost(kNotificationCartItemsChanged)
+            _cachedProductsInCart.append(product)
         }
     }
     
-    class func indexOfProductWithId(productId : Int?) -> Int?
+    func removeProductFromCart(productID : Int?)
     {
-        if let productId = productId, index = cachedProductsInCart.indexOf({($0.id?.integerValue ?? -1) == productId})
+        if let productIndex = indexOfProductWithId(productID)
+        {
+            _cachedProductsInCart.removeAtIndex(productIndex)
+        }
+    }
+    
+    func indexOfProductWithId(productId : Int?) -> Int?
+    {
+        if let productId = productId, index = _cachedProductsInCart.indexOf({($0.id?.integerValue ?? -1) == productId})
         {
             return index
         }
@@ -52,49 +97,26 @@ class Register : NSObject
         }
     }
     
-    class func addProductToCart(product : Product?)
+    func saveToDisk()
     {
-        if let product = product
-        {
-            if indexOfProductWithId(product.id?.integerValue) == .None
-            {
-                cachedProductsInCart.append(product)
-                
-                //setGenericValueForKey(product, forKey: kProductsKey)
-            }
-        }
-    }
-    
-    class func removeProductFromCart(productID : Int?)
-    {
-        if let productIndex = indexOfProductWithId(productID)
-        {
-            cachedProductsInCart.removeAtIndex(productIndex)
-            
-            //setGenericValueForKey(productsInCart.removeAtIndex(productIndex), forKey: kProductsKey)
-        }
-    }
-    
-    class func saveToDisk()
-    {
-        Register.categories = cachedCategories
-        Register.productsInCart = cachedProductsInCart
+        categories = cachedCategories
+        productsInCart = _cachedProductsInCart
     }
     
     //MARK: Local storage access methods
-    private class var categories : [String]
+    private var categories : [String]
     {
         set
         {
             if newValue.count > categories.count
             {
-                setGenericValueForKey(newValue, forKey: kCategoriesKey)
+                diskSaver.setGenericValueForKey(newValue, forKey: kCategoriesKey)
             }
         }
         
         get
         {
-            guard let localCategories = genericValueForKey(kCategoriesKey) as? [String] else
+            guard let localCategories = diskSaver.genericValueForKey(kCategoriesKey) as? [String] else
             {
                 return []
             }
@@ -103,50 +125,21 @@ class Register : NSObject
         }
     }
     
-    private class var productsInCart : [Product]
+    private var productsInCart : [Product]
     {
         set
         {
-            setGenericValueForKey(newValue.map({$0.toNonNullDictionary}) , forKey: kProductsKey)
+            diskSaver.setGenericValueForKey(newValue.map({$0.toNonNullDictionary}) , forKey: kProductsKey)
         }
         
         get
         {
-            guard let products = genericValueForKey(kProductsKey) as? [[NSObject : AnyObject]] else
+            guard let products = diskSaver.genericValueForKey(kProductsKey) as? [[NSObject : AnyObject]] else
             {
                 return []
             }
             
             return products.map({Product(dictionary:$0)})
-        }
-    }
-    
-    //MARK: Internal methods
-    private class func setValue(value : String, key : String)
-    {
-        setGenericValueForKey(value, forKey: key)
-    }
-    
-    private class func setGenericValueForKey(value : AnyObject?, forKey key : String)
-    {
-        NSUserDefaults.standardUserDefaults().setValue(value, forKey: key)
-        NSUserDefaults.standardUserDefaults().synchronize()
-    }
-    
-    private class func genericValueForKey(key : String) -> AnyObject?
-    {
-        return NSUserDefaults.standardUserDefaults().valueForKey(key)
-    }
-    
-    private class func valueForKey(key : String) -> String
-    {
-        if let value = NSUserDefaults.standardUserDefaults().valueForKey(key) as? String
-        {
-            return value
-        }
-        else
-        {
-            return ""
         }
     }
 }

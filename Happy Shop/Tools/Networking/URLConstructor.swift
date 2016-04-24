@@ -10,55 +10,29 @@ import Foundation
 private let kServerURL : String = "http://sephora-mobile-takehome-2.herokuapp.com/api/v1"
 private let kProductsBranch : String = "products"
 
+var urlConstructor : URLConstructor
+{
+    return URLConstructor.sharedInstance
+}
+
 class URLConstructor
 {
-    class func productWithId(productId : Int) -> URLConstructor
+    private static let sharedInstance : URLConstructor = URLConstructor(baseURL: kServerURL)
+    
+    private var baseURL : NSURL?
+    
+    init(baseURL : String)
     {
-        return products().append("\(productId)")
+        self.baseURL = NSURL(string: baseURL)
+    }
+
+    func productWithId(productId : Int) -> NSURL?
+    {
+        return products()?.URLByAppendingPathComponent("\(productId)")
     }
     
-    class func products() -> URLConstructor
+    func products() -> NSURL?
     {
-        return testServer().append(kProductsBranch)
-    }
-    
-    private class func testServer() -> URLConstructor
-    {
-        return URLConstructor(value: kServerURL)
-    }
-    
-    //MARK: Wrapped setters/getters
-    var value : String!
-    
-    var url : NSURL
-    {
-        get
-        {
-            return NSURL(string: (value as NSString).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
-        }
-    }
-    
-    //MARK: init
-    private init(value : String)
-    {
-        self.value = value
-    }
-    
-    //MARK: Helpers
-    private func appendParametersString(parametersString : String) -> URLConstructor
-    {
-        let appendedString : String = parametersString.characters.count > 0 ? "?" + parametersString : ""
-        
-        //strange thing this does not work// value += appendedString
-        value = value + appendedString
-         
-        return self
-    }
-    
-    private func append(value : String) -> URLConstructor
-    {
-        self.value! += "/\(value)"
-        
-        return self
+        return baseURL?.URLByAppendingPathComponent(kProductsBranch)
     }
 }

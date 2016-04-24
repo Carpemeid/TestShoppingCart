@@ -8,21 +8,22 @@
 
 import Foundation
 
-class ConnectionChecker : NSObject
-{    
-    class func checkInternetConnection() -> Bool
+class ConnectionChecker : NSObject, ConnectionCheckerProtocol
+{
+    static let sharedInstance : ConnectionChecker = ConnectionChecker()
+    
+    func checkInternetConnection() -> Bool
     {
         return checkCellularConnectivity() || checkWirelessConnectivity()
     }
     
-    class func checkCellularConnectivity() -> Bool
+    private func checkCellularConnectivity() -> Bool
     {
         return Reachability.reachabilityForInternetConnection().currentReachabilityStatus().rawValue != 0
     }
     
-    class func checkWirelessConnectivity() -> Bool
+    private func checkWirelessConnectivity() -> Bool
     {
         return Reachability.reachabilityForInternetConnection().currentReachabilityStatus().rawValue == ReachableViaWiFi.rawValue
     }
-
 }
