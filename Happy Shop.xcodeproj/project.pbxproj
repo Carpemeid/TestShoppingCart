@@ -109,6 +109,7 @@
 		3CCAE2DA1CCCED1000AF6E19 /* DiskSaverMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskSaverMock.swift; sourceTree = "<group>"; };
 		3CCAE2DF1CCD4B2600AF6E19 /* ProductsCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsCollectionDelegate.swift; sourceTree = "<group>"; };
 		3CCAE2E31CCD53C400AF6E19 /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
+		3CCAE2EA1CCD722800AF6E19 /* Happy Shop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Happy Shop-Bridging-Header.h"; sourceTree = "<group>"; };
 		3CCD56941CC81C76002AF042 /* ProductListResponseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListResponseTest.swift; sourceTree = "<group>"; };
 		3CDD0FCF1CC16FE4004023C7 /* Happy Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDD0FD21CC16FE4004023C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		3CDD0FF61CC16FE4004023C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CDD100A1CC17BA7004023C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Happy Shop/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		3CDD100D1CC17BAD004023C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Happy Shop/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
-		3CDD10101CC17C40004023C7 /* Happy Shop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Happy Shop-Bridging-Header.h"; path = "../Tools/Networking/Happy Shop-Bridging-Header.h"; sourceTree = "<group>"; };
 		3CDD10161CC17C79004023C7 /* URLConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConstructor.swift; sourceTree = "<group>"; };
 		3CDD10181CC17DE0004023C7 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3CDD101C1CC18002004023C7 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 		3CDD10061CC1701C004023C7 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				3CDD10101CC17C40004023C7 /* Happy Shop-Bridging-Header.h */,
+				3CCAE2EA1CCD722800AF6E19 /* Happy Shop-Bridging-Header.h */,
 				3CDD0FDB1CC16FE4004023C7 /* Assets.xcassets */,
 				3CDD0FE01CC16FE4004023C7 /* Info.plist */,
 			);
@@ -756,7 +756,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sephora.Happy-Shop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Happy Shop/Tools/Networking/Happy Shop-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Happy Shop/Supporting files/Happy Shop-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -771,7 +771,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sephora.Happy-Shop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Happy Shop/Tools/Networking/Happy Shop-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Happy Shop/Supporting files/Happy Shop-Bridging-Header.h";
 			};
 			name = Release;
 		};
